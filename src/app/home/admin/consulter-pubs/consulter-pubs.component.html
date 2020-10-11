@@ -1,0 +1,221 @@
+<div class="row pt-4">
+  <div class="col-sm-12">
+    <!--START - Recent Ticket Comments-->
+    <div class="element-wrapper">
+      <h6 class="element-header text-center"> Liste des publications</h6>
+      <div class="col-sm-5">
+        <a  data-toggle="modal" data-target="#myModal2" >
+          <div class="containerbutton">
+            <div class="button52" id="button-5">
+              <div id="translate"></div>
+              <a id="Publiera">Publier</a>
+            </div>
+          </div>
+        </a>
+      </div>
+      <br><br>
+      <div class="col-sm-12">
+        <form id="SearchForm">
+          <input id="myInput" onkeyup="SearchName()" type="search">
+          <i class="os-icon os-icon-search"></i>
+        </form>
+      </div>
+
+
+      <div class="element-box-tp">
+        <div class="table-responsive">
+          <table class="table table-padded">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Sujet</th>
+              <th>Description</th>
+              <th>Date Publication</th>
+              <th>Cible</th>
+              <th>Fichier</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr *ngFor="let i of ShowPubs">
+              <td class="text-center">
+                <label  class="si si-checkbox">
+                  <input type="checkbox" id="defaultCheckbox" />
+                  <span class="si-label"></span>
+                </label>
+              </td>
+              <td>
+                <div class="text-center"><span>{{i.sujet}}</span></div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{i.texte}}</div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{i.datePub|date:'dd/MM/yyyy'}}</div>
+              </td>
+
+              <td><span class="smaller lighter">{{i.ciblePub}}</span></td>
+              <td><span class="smaller lighter">{{i.docPub}}</span></td>
+              <td class="row-actions">
+                <a class="danger" (click)="DeletePubFn(i._id)"><i class="os-icon os-icon-ui-15"></i></a>
+                <a class="info" data-toggle="modal" data-target="#myModal" (click)="GetPubID(i._id);ShowPubByID(i._id)"> <i class="os-icon os-icon-edit-1"> </i> </a>
+
+              </td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Pagination-->
+      <div class="controls-below-table">
+        <div class="table-records-pages">
+          <ul>
+            <li><a href="#">Previous</a></li>
+            <li><a class="current" href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="position: relative; padding-left : 450px;">
+        <a class="btn btn-sm btn-danger" ><b style="color: white;">Effacer les publications séléctionnés</b> </a>
+      </div>
+
+    </div>
+    <!--END - Recent Ticket Comments-->
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                <div class="element-box">
+                  <form id="formValidate">
+                    <div class="element-info">
+                      <div class="element-info-with-icon">
+                        <div class="element-info-icon">
+                          <div class="os-icon os-icon-wallet-loaded"></div>
+                        </div>
+                        <div class="element-info-text">
+                          <h5 class="element-inner-header">Modifier la publication</h5>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                      <input class="form-control"  [value]="ShowPubByIDVar.sujet" required="required" type="text">
+                      <div class="help-block form-text with-errors form-control-feedback"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <input class="form-control"  [value]="ShowPubByIDVar.texte" required="required" type="text">
+                      <div class="help-block form-text with-errors form-control-feedback"></div>
+                    </div>
+
+                    <div class="form-group">
+                      <select id="pet-select" class="form-control" >
+                        <option selected="selected"></option>
+                        <option value="" ></option>
+                      </select>
+                    </div>
+
+
+                    <div class="form-group">
+                      <input class="form-control"  [value]="ShowPubByIDVar.ciblePub" required="required" type="text">
+                      <div class="help-block form-text with-errors form-control-feedback"></div>
+                    </div>
+
+
+                    <div class="form-buttons">
+                      <button type="reset" class="btn btn-danger" data-dismiss="modal" data-target="#myModal">Annuler</button>
+                      <button class="btn btn-primary" type="submit" (click)="SubmitModify()">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                <div class="element-box">
+                  <form id="formValidate2" [formGroup]="pubData" (ngSubmit)="OnPubAdd()">
+                    <div class="steps-w">
+                      <div class="step-content active" id="stepContent2">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <h6 class="element-header">Publier des actualités :</h6>
+                              <label > Sujet</label>
+                              <input class="form-control"  formControlName="sujet" placeholder="Sujet" type="text" [ngClass]="{ 'is-invalid': submitted && f.sujet.errors }">
+                              <div *ngIf="submitted && f.sujet.errors" class="invalid-feedback"><div *ngIf="f.sujet.errors.required">Sujet est obligatoire</div></div>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                          <label> Description</label>
+                          <textarea class="form-control" rows="3" formControlName="texte" [ngClass]="{ 'is-invalid': submitted && f.texte.errors }"></textarea>
+                          <div *ngIf="submitted && f.texte.errors" class="invalid-feedback"><div *ngIf="f.texte.errors.required">Description est obligatoire</div></div>
+
+                        </div>
+
+                        <div class="form-group">
+                          <label> Cible</label>
+                          <select class="form-control" formControlName="ciblePub" [ngClass]="{ 'is-invalid': submitted && f.ciblePub.errors }">
+                            <option >Tout le monde</option>
+                            <option [selected]="true" value="Student">Etudiants</option>
+                            <option value="Prof">Enseignants</option>
+                          </select>
+                          <div *ngIf="submitted && f.ciblePub.errors" class="invalid-feedback"><div *ngIf="f.ciblePub.errors.required">Description est obligatoire</div></div>
+
+                        </div>
+
+                        <div class="file-upload-wrapper">
+                          <input type="file" (change)="uploadDocPub($event.target.files)" id="input-file-now" class="file-upload " />
+                        </div>
+                        <br>
+                        <div class="buttons-w">
+                          <button class="btn btn-danger">Annuler</button>
+                          <button class="btn btn-primary">Publier</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

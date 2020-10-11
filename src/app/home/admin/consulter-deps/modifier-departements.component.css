@@ -1,0 +1,216 @@
+
+#SearchForm{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: all 1s;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 4px solid #4e96bf;
+  padding: 5px;
+}
+
+#myInput{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 43px;
+  line-height: 30px;
+  outline: 0;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px;
+}
+
+.os-icon-search{
+  box-sizing: border-box;
+  padding: 10px;
+  width: 43px;
+  height: 44.3px;
+  position: absolute;
+  top: -0.7px;
+  right: -1px;
+  border-radius: 50%;
+  color: #07051a;
+  text-align: center;
+  font-size: 1.2em;
+  transition: all 1s;
+}
+
+#SearchForm:hover{
+  width: 200px;
+  cursor: pointer;
+}
+
+#SearchForm:hover input{
+  display: block;
+}
+
+#SearchForm:hover .os-icon-search{
+  background: #4e96bf;
+}
+
+
+.si {
+  --color-label: #ff0000;
+  --color-default: #4e96bf;
+  --color-active: #4e96bf;
+  --rotate-default: 180deg;
+  --rotate-active: 40deg;
+  --border-size-checkmark: 2px;
+  --border-size-box: 1px;
+  --input-size: 20px;
+  --guter: 15px;
+}
+/* basic reset */
+.si,
+.si *,
+.si *::before,
+.si *::after {
+  box-sizing: border-box;
+}
+/* label */
+.si {
+  cursor: pointer;
+  position: relative;
+}
+.si .si-label {
+  display: inline-block;
+  padding-left: var(--guter);
+  color: var(--color-label);
+  vertical-align: text-top;
+}
+
+.si > input { display: none; }
+/* OR */
+.si > input { opacity: 0; }
+/* OR */
+.si > input { visibility: hidden; }
+
+.si > input[type="checkbox"],
+.si > input[type="radio"] {
+  clip-path: polygon(0 0);
+}
+
+.si .si-label::before,
+.si .si-label::after {
+  transition: all 0.2s ease-in-out;
+}
+/* an element for both checkbox and radio */
+.si .si-label::before {
+  content: '';
+  display: block;
+  width: var(--input-size);
+  height: var(--input-size);
+  border: var(--border-size-box) solid var(--color-default);
+  position: absolute;
+  top: -3px;
+  left: -2px;
+  transform: rotate(0deg) scale(1);
+}
+/* feedback when the user interacts with an element */
+.si .si-label:hover::before {
+  border-color: var(--color-active);
+}
+
+/* checkbox square */
+.si.si-checkbox .si-label::before {
+  border-radius: var(--border-size-checkmark);
+}
+/* checkbox checkmark */
+.si.si-checkbox .si-label::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 18px;
+  border-width: 0 var(--border-size-checkmark) var(--border-size-checkmark) 0;
+  border-style: solid;
+  border-color: transparent var(--color-active) var(--color-active) transparent;
+  position: absolute;
+  top: -3px;
+  left: 0;
+  transform: rotate(var(--rotate-default)) scale(0);
+}
+
+/* checkbox square */
+.si.si-checkbox > input:checked + .si-label::before {
+  transform: rotate(var(--rotate-active)) scale(0);
+}
+/* checkmark */
+.si.si-checkbox > input:checked + .si-label::after {
+  left: 4px;
+  transform: rotate(var(--rotate-active)) scale(1);
+}
+
+
+/************STYLISH BUTTON BB***************/
+
+.containerbutton{
+  width: 100%;
+  /*margin: 0;*/
+  margin-left: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.button52 {
+  display: inline-flex;
+  height: 40px;
+  width: 150px;
+  border: 3px solid #000000;
+  /*margin: 20px 20px 20px 20px;*/
+  background-color: #4e96bf;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: .8em;
+  letter-spacing: 2px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#Publiera {
+  color: #000000;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+
+#button-5 {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#button-5 a {
+  position: relative;
+  transition: all .45s ease-Out;
+}
+
+#translate {
+  transform: rotate(50deg);
+  width: 100%;
+  height: 250%;
+  left: -200px;
+  top: -30px;
+  background: #BFC0C0;
+  position: absolute;
+  transition: all .3s ease-Out;
+}
+
+#button-5:hover #translate {
+  left: 0;
+}
+
+#button-5:hover a {
+  color: #2D3142;
+}

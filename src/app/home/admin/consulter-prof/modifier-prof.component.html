@@ -1,0 +1,212 @@
+<div class="row pt-4">
+  <div class="col-sm-12">
+    <!--START - Recent Ticket Comments-->
+    <div class="element-wrapper">
+      <h6 class="element-header text-center">Liste des Enseignants</h6>
+
+      <div class="col-sm-12">
+        <form id="SearchForm">
+          <input id="myInput" onkeyup="SearchName()" type="search">
+          <i class="os-icon os-icon-search"></i>
+        </form>
+      </div>
+
+      <div class="element-box-tp">
+        <div class="table-responsive">
+          <table class="table table-padded" >
+            <thead>
+            <tr>
+              <th></th>
+              <th>Utilisateur</th>
+              <th>Departement</th>
+              <th>Date Naissance</th>
+              <th>Sexe</th>
+              <th>Pays</th>
+              <th class="text-center">Telephone</th>
+              <th>E-Mail</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr *ngFor="let a of ShowListProfVar">
+              <td class="text-center">
+                <label  class="si si-checkbox">
+                  <input type="checkbox" id="defaultCheckbox" />
+                  <span class="si-label"></span>
+                </label>
+              </td>
+              <td>
+                <div class="user-with-avatar"><img alt="" src="assets/Uploads/images/{{a.photo}}"><span>{{a.firstName}} {{a.lastName}}</span></div>
+              </td>
+              <td class="text-center"><a class="badge badge-success-inverted" >{{a.nomDepartement.libelleDep}}</a></td>
+              <td>
+                <div class="smaller lighter">{{a.Date_Nais|date:'dd/MM/yyyy'}}</div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{a.Sexe}}</div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{a.Pays}}</div>
+              </td>
+              <td><span class="smaller lighter">{{a.Tel}}</span></td>
+              <td class="text-center"><a class="badge badge-success-inverted" >{{a.Mail}}</a></td>
+              <td class="row-actions">
+                <a class="danger" (click)="DeleteProfAccountFn(a._id)"><i class="os-icon os-icon-ui-15"></i></a>
+                <a class="info" data-toggle="modal" data-target="#myModal" (click)="GetProfID(a._id,a.firstName,a.lastName,a.Date_Nais,a.CIN,a.Mail);ShowProfCordsFn()"><i class="os-icon os-icon-edit-1"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Pagination-->
+      <div class="controls-below-table">
+        <div class="table-records-pages">
+          <ul>
+            <li><a href="#">Previous</a></li>
+            <li><a class="current" href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="position: relative; padding-left : 450px;">
+        <a class="btn btn-sm btn-danger" ><b style="color: white;">Effacer les comptes séléctionnés</b> </a>
+      </div>
+
+    </div>
+    <!--END - Recent Ticket Comments-->
+  </div>
+</div>
+
+
+<div class="container">
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="content-i">
+          <div class="content-box text-center">
+                <div class="element-wrapper">
+                  <div class="element-box">
+                    <form id="formValidate" [formGroup]="FormEditProf" (ngSubmit)="EditProfFn()">
+                      <div class="element-info">
+                        <div class="element-info-with-icon">
+                          <div class="element-info-icon">
+                            <div class="os-icon os-icon-wallet-loaded"></div>
+                          </div>
+                          <div class="element-info-text">
+                            <h5 class="element-inner-header">Mise à jour profil Enseignant</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+
+                        <fieldset class="form-group">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <input class="form-control" formControlName="firstName"  [value]="ShowProfCordsVar.firstName" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.firstName.errors }" type="text">
+                                <div class="help-block form-text with-errors form-control-feedback"></div>
+                                <div *ngIf="submitted && GetEditProfC.firstName.errors" class="invalid-feedback">
+                                  <div *ngIf="GetEditProfC.firstName.errors.required">Prénom est obligatoire</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <input class="form-control" formControlName="lastName" data-error="Please input your Last Name" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.lastName.errors }" [value]="ShowProfCordsVar.lastName" type="text">
+                                <div class="help-block form-text with-errors form-control-feedback"></div>
+                                <div *ngIf="submitted && GetEditProfC.lastName.errors" class="invalid-feedback">
+                                  <div *ngIf="GetEditProfC.lastName.errors.required">Nom est obligatoire</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <input class="single-daterange form-control" formControlName="Date_Nais" [value]="ShowProfCordsVar.Date_Nais|date:'dd/MM/yyyy'" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.Date_Nais.errors }" type="date" >
+                                <div *ngIf="submitted && GetEditProfC.Date_Nais.errors" class="invalid-feedback">
+                                  <div *ngIf="GetEditProfC.Date_Nais.errors.required">Date de naissance est obligatoire</div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <input class="form-control" formControlName="CIN" [value]="ShowProfCordsVar.CIN" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.CIN.errors }" type="text">
+                                <div class="help-block form-text with-errors form-control-feedback"></div>
+                                <div *ngIf="submitted && GetEditProfC.CIN.errors" class="invalid-feedback">
+                                  <div *ngIf="GetEditProfC.CIN.errors.required">CIN est obligatoire</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+
+                        <input class="form-control" formControlName="Mail" data-error="Your email address is invalid" [value]="ShowProfCordsVar.Mail" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.Mail.errors }" type="email">
+                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                        <div *ngIf="submitted && GetEditProfC.Mail.errors" class="invalid-feedback">
+                          <div *ngIf="GetEditProfC.Mail.errors.required">E-mail obligatoire (@polytechnicien.tn))</div>
+                          <div *ngIf="GetEditProfC.Mail.errors.pattern">Votre e-mail doit avoir'@polytechnicien.tn'</div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <input class="form-control" formControlName="password" data-minlength="6" placeholder="Mot de passe" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.password.errors }" type="password">
+                            <div class="help-block form-text text-muted form-control-feedback">Minimum 6 caractères</div>
+                            <div *ngIf="submitted && GetEditProfC.password.errors" class="invalid-feedback">
+                              <div *ngIf="GetEditProfC.password.errors.required">Mot de passe est obligatoire</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <input class="form-control" formControlName="confirmPassword"  placeholder="Confirmer Mot de passe" [ngClass]="{ 'is-invalid': submitted && GetEditProfC.confirmPassword.errors }"type="password">
+                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                            <div *ngIf="submitted && GetEditProfC.confirmPassword.errors" class="invalid-feedback">
+                              <div *ngIf="GetEditProfC.confirmPassword.errors.required">Confirmation du mot de passe est obligatoire</div>
+                              <div *ngIf="GetEditProfC.confirmPassword.errors.mustMatch">Les mots de passes ne sont pas identiques!</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <select id="pet-select" formControlName="nomDepartement"  [ngClass]="{ 'is-invalid': submitted && GetEditProfC.nomDepartement.errors }" class="form-control">
+                          <option *ngFor="let i of DepVar" value="{{i._id}}">{{i.libelleDep}}</option>
+                        </select>
+                        <div *ngIf="submitted && GetEditProfC.nomDepartement.errors" class="invalid-feedback">
+                          <div *ngIf="GetEditProfC.nomDepartement.errors.required">nomDepartement est obligatoire</div>
+                        </div>
+                      </div>
+
+
+                      <div class="file-upload-wrapper form-control">
+                        <input type="file" (change)="getFile($event)"  id="input-file-now" class="file-upload" />
+                      </div>
+
+                      <div class="form-buttons-w text-center">
+                        <button type="reset" class="btn btn-danger">Annuler</button>
+                        <button class="btn btn-primary" type="submit"> Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+

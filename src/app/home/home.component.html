@@ -1,0 +1,65 @@
+<!--
+<body class="menu-position-side menu-side-left full-screen with-content-panel">
+-->
+<div class="all-wrapper with-side-panel solid-bg-all">
+  <div aria-hidden="true" *ngIf="GetUserInfo != 1" class="onboarding-modal modal fade animated show-on-load" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-centered" role="document">
+      <div class="modal-content text-center">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="OnRemoveModal()">
+          <span class="close-label" routerLink="/home/moduleActualite/ConsulterActualite">Quitter</span>
+          <span class="os-icon os-icon-close"></span>
+        </button>
+        <div class="onboarding-slider-w">
+          <div class="onboarding-slide">
+            <div class="onboarding-media"><img alt="" src="assets/img/polypoly.png" width="150px"></div>
+            <div class="onboarding-content with-gradient">
+              <h4 class="onboarding-title">Bienvenue sur Poly-Forum!</h4>
+              <div class="onboarding-text">This is an example of a multistep onboarding screen, you can use it to introduce your customers to your app, or collect additional information from them before they start using your app.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout-w">
+
+    <!--------------------
+START - Main Menu
+-------------------->
+
+    <app-sidebar></app-sidebar>
+
+    <!--------------------
+END - Main Menu
+-------------------->
+    <div class="content-w">
+      <!--------------------
+START - Top Bar
+-------------------->
+      <app-header></app-header>
+
+
+      <!--------------------
+END - Top Bar
+-------------------->
+
+
+
+
+      <app-layout></app-layout>
+
+
+
+
+    </div>
+  </div>
+  <div class="display-type"></div>
+</div>
+
+
+
+
+
+<!--</body>-->

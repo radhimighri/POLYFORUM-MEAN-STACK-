@@ -1,0 +1,57 @@
+
+<div class="top-bar color-scheme-transparent" >
+
+  <div class="top-menu-controls">
+
+    <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left" *ngIf="!isUser && !isProf"><i class="os-icon os-icon-others-43"></i>
+      <div class="new-messages-count" *ngIf="UnconfirmedProfCountVar.length > 0 && UnconfirmedStudentCountVar.length == 0">1</div>
+      <div class="new-messages-count" *ngIf="UnconfirmedStudentCountVar.length > 0 && UnconfirmedProfCountVar.length == 0">1</div>
+      <div class="new-messages-count" *ngIf="UnconfirmedStudentCountVar.length > 0 && UnconfirmedProfCountVar.length > 0">2</div>
+      <div class="os-dropdown message-list">
+        <div class="icon-w"><i class="os-icon os-icon-user-plus"></i></div>
+        <ul>
+          <li *ngIf="UnconfirmedProfCountVar.length > 0">
+            <a (click)="onClick()" routerLink="/home/moduleAdministrateur/validateprofaccounts">
+              <div class="user-avatar-w"><img alt="" src="assets/img/confirm.png"></div>
+              <div class="message-content">
+                <h1 class="message-title" style="color:white;font-size : 11px;">Confirmation Des Comptes(Prof) [{{UnconfirmedProfCountVar.length}}]</h1>
+              </div>
+            </a>
+          </li>
+          <li *ngIf="UnconfirmedStudentCountVar.length > 0">
+            <a (click)="onClick()" routerLink="/home/moduleAdministrateur/validateaccounts">
+              <div class="user-avatar-w"><img alt="" src="assets/img/confirm.png"></div>
+              <div class="message-content">
+                <h1 class="message-title" style="color:white;font-size : 11px;">Confirmation Des Comptes(Etudiant) [{{UnconfirmedStudentCountVar.length}}]</h1>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a>
+              <div class="user-avatar-w"><img alt="" src="assets/img/avatar1.jpg"></div>
+              <div class="message-content">
+                <h6 class="message-from">John Mayers</h6>
+                <h6 class="message-title">Mot de passe oublié</h6></div>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left"><i class="os-icon os-icon-ui-46"></i>
+      <div class="os-dropdown">
+        <div class="icon-w"><i class="os-icon os-icon-ui-46"></i></div>
+        <ul>
+          <li><a routerLink="moduleAdministrateur/modifierAdmin" *ngIf="!isUser && !isProf"><i class="os-icon os-icon-ui-49"></i><span>Mise a jour profil</span></a></li>
+          <li><a routerLink="moduleProf/modifierProf" *ngIf="isProf"><i class="os-icon os-icon-ui-49"></i><span>Mise a jour profil</span></a></li>
+          <li><a routerLink="moduleEtudiant/modifieretudiant" *ngIf="isUser"><i class="os-icon os-icon-ui-49"></i><span>Mise a jour profil</span></a></li>
+          <li><a (click)="OnLogout()"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
+
+        </ul>
+      </div>
+    </div>
+</div>
+</div>

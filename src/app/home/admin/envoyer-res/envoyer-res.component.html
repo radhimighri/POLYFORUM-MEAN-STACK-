@@ -1,0 +1,68 @@
+<div class="content-panel-toggler"><i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span></div>
+<div class="content-i">
+  <div class="content-box ">
+    <div class="element-wrapper">
+      <div class="element-box" style="margin-right: 100px;margin-left: 100px;">
+        <form [formGroup]="ResData" >
+          <div class="steps-w">
+            <div class="step-content active" >
+                <div class="col-sm-9">
+                    <h6 style="margin-left: 150px;" class="element-header">Envoyer résultat :</h6>
+                  <div style="margin-left: 150px;" class="form-group text-center">
+                    <label >Etudiant(e)</label>
+                    <select  class="form-control" formControlName="student" [ngClass]="{ 'is-invalid': submitted && f.student.errors }">
+                      <option value="{{i._id}}" *ngFor="let i of ShowStudentsVar">{{i.firstName}} {{i.lastName}} || {{i.matricule}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.student.errors" class="invalid-feedback"><div *ngIf="f.student.errors.required">Champ obligatoire</div></div>
+                  </div>
+              </div>
+
+              <div class="col-sm-9">
+              <div class="form-group text-center" style="margin-left: 150px;">
+                <label >Résultat</label>
+                <select class="form-control"  formControlName="res" [ngClass]="{ 'is-invalid': submitted && f.res.errors }">
+                  <option value="" [selected]="true">Veuillez selectionner le resultat</option>
+                  <option value="Admis">Admis</option>
+                  <option value="Echoué">Echoué</option>
+                  <option value="Controle">Controle</option>
+                </select>
+                <div *ngIf="submitted && f.res.errors" class="invalid-feedback">
+                  <div *ngIf="f.res.errors.required">Champ obligatoire</div>
+                </div>
+              </div>
+              </div>
+
+              <div class="col-sm-9">
+                <div class="form-group text-center" style="margin-left: 150px;">
+                <label >Moyenne</label>
+                <input class="form-control" placeholder="Moyenne" type="text"  formControlName="moy" [ngClass]="{ 'is-invalid': submitted && f.moy.errors }">
+                <div *ngIf="submitted && f.moy.errors" class="invalid-feedback"><div *ngIf="f.moy.errors.required">Champ obligatoire</div></div>
+              </div>
+              </div>
+
+              <div class="col-sm-9">
+                <div class="form-group text-center" style="margin-left: 150px;">
+              <label >Relevé de notes:</label><br>
+              <div class="file-upload-wrapper form-control">
+                <input style="margin-left: 40px;" type="file" (change)="uploadResRelever($event.target.files)" id="input-file-now" class="file-upload " />
+              </div>
+                </div>
+              </div>
+
+
+              <br>
+              <div class="col-sm-5">
+                  <div class="containerbutton">
+                    <div class="button52" id="button-5">
+                      <div id="translate"></div>
+                      <a id="Publiera" (click)="OnResAdd()">Publier</a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

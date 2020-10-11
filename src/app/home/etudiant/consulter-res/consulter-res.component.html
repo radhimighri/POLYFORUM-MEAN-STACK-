@@ -1,0 +1,50 @@
+<div class="row pt-4">
+  <div class="col-sm-12">
+    <!--START - Recent Ticket Comments-->
+    <div class="element-wrapper">
+      <h6 class="element-header text-center">RESULTAT DE : {{GetResultVar.student.firstName}} {{GetResultVar.student.lastName}} </h6>
+
+      <div class="element-box-tp">
+        <div class="table-responsive"  style="padding-left: 200px;">
+          <table class="table table-padded text-center" style="width:65%; ">
+            <thead>
+            <tr>
+              <th>Résultat</th>
+              <th>Moyenne</th>
+              <th>Relevé de notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+              <td *ngIf="GetResultVar.res == 'Admis'"><a class="badge badge-success-inverted" >{{GetResultVar.res}}</a></td>
+              <td *ngIf="GetResultVar.res == 'Echoué'"><a class="badge badge-danger-inverted" >{{GetResultVar.res}}</a></td>
+              <td>
+                <div class="">{{GetResultVar.moy}}</div>
+              </td>
+              <td align="center"><button type="button" (click)='GetRelever()'  class="btn btn-primary btn-sm">Télécharger</button></td>
+            </tr>
+            </tbody>
+            <tr></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <img style="margin-left: 800px;position: relative;bottom: 150px;" class="text-flicker-in-glow" src="assets/img/polypoly.png">
+  </div>
+  <div *ngIf="GetResultVar.res == 'Admis'">
+  <div id="texts" style="margin-left: 400px;position: relative; bottom:130px;" class="focus-in-contract-bck" >Félicitations!</div>
+  <div id="texts2"  style="position: relative; bottom:60px;left: 300px;" class="text-pop-up-tr">La persévérance et le travail, ça paie toujours !</div>
+  <div id="texts2"  style="position: relative;left: 90px;bottom:35px;" class="text-pop-up-tl">On vous souhaite le meilleur pour la suite.</div>
+  <img class="flip-in-hor-bottom" src="assets/img/graduate.gif" style="border-radius: 15px ; padding-left: 250px;position: relative;bottom: 50px;">
+  </div>
+  <div *ngIf="GetResultVar.res == 'Echoué'">
+    <div id="texts" style="margin-left: 400px;position: relative; bottom:130px;" class="focus-in-contract-bck" >Echoué?</div>
+    <div id="texts2"  style="position: relative; bottom:60px;left: 300px;" class="text-pop-up-tr">L'échec est seuelement l'opportunité de</div>
+    <div id="texts2"  style="position: relative;left: 90px;bottom:35px;" class="text-pop-up-tl">Recommencer d'une façon PLUS INTELLIGENTE</div>
+    <div id="texts" style="margin-left: 300px;position: relative;bottom: 30px" class="tracking-in-expand" >Aie Confiance En Toi</div>
+  </div>
+
+</div>
+

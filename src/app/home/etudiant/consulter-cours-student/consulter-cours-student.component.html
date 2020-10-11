@@ -1,0 +1,139 @@
+<div class="element-wrapper">
+  <h6 class="element-header text-center">Gérer cours</h6>
+  <br><br>
+  <div class="col-sm-12">
+    <form id="SearchForm">
+      <input id="myInput" onkeyup="SearchName()" type="search">
+      <i class="os-icon os-icon-search"></i>
+    </form>
+  </div>
+
+  <div class="element-box-tp">
+    <div class="table-responsive">
+      <table class="table table-padded">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Cours</th>
+          <th>Description</th>
+          <th>Date de publication</th>
+          <th>Prof</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+
+        <tr *ngFor="let i of ShowCourseStudentsVar">
+          <td class="text-center" width="20px">
+            <label  class="si si-checkbox">
+              <input type="checkbox" id="defaultCheckbox" />
+              <span class="si-label"></span>
+            </label>
+          </td>          <td>
+          <div class="badge badge-success-inverted"><span>{{i.libelle}}</span></div>
+        </td>
+          <td class="form-control" height="60px"><a >{{i.description}}</a></td>
+          <td>
+            <div class="smaller lighter">{{i.datePub|date:'dd/MM/yyyy'}}</div>
+          </td>
+          <td class="form-control" height="60px"><a class="badge badge-success-inverted"  >{{i.prof.firstName}} {{i.prof.lastName}}</a></td>
+          <td class="row-actions"><a ><i class="os-icon os-icon-ui-51"></i></a><a class="info" data-toggle="modal" data-target="#myModal3" (click)="GetCoursID(i._id);ShowCoursByID();ShowCommentsByCourID()"><i class="os-icon os-icon-pencil-1"></i></a></td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--Pagination-->
+  <div class="controls-below-table">
+    <div class="table-records-pages">
+      <ul>
+        <li><a href="#">Previous</a></li>
+        <li><a class="current" href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+      </ul>
+
+      <div class="col-sm-5" style="position: relative; padding-left : 450px;">
+        <a class="btn btn-sm btn-danger" ><b style="color: white;">Effacer les comptes séléctionnés</b> </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                <form id="formValidate3"  >
+
+                  <div class="row">
+
+
+                    <table class="table">
+                      <tr >
+                        <td style="span-weight:bold"><span  color="#white"> <a class="badge badge-primary" ><b style="color: aliceblue">Cours</b></a></span></td>
+                        <td style="span-weight:bold"><span  color="#white"><a class="badge badge-primary" ><b style="color: aliceblue">DESCRIPTION</b></a></span></td>
+                        <td style="span-weight:bold"><span  color="#white"><a class="badge badge-primary" ><b style="color: aliceblue">DATE DE PUBLICATION</b></a></span></td>
+                        <td style="span-weight:bold"><span  color="#white"><a class="badge badge-primary" ><b style="color: aliceblue">Prof</b></a></span></td>
+                      </tr>
+
+
+                      <tr  >
+                        <td>{{ShowCourstByIDVar.libelle}}</td>
+                        <td>{{ShowCourstByIDVar.description}}</td>
+                        <td>{{ShowCourstByIDVar.datePub|date:'dd/MM/yyyy'}}</td>
+                        <td>{{ShowCourstByIDVar.prof.firstName}} {{ShowCourstByIDVar.prof.lastName}}</td>
+                      </tr>
+
+                    </table>
+
+                    <table class="table">
+
+                      <tr class="text-primary" *ngFor="let j of ShowCommentsByCourIDVar">
+                        <td>
+                          <div class="user-with-avatar"><img alt="" src="assets/img/avatar2.jpg"><span>{{j.user.firstName}} {{j.user.lastName}} </span></div>
+                        </td>
+                        <td></td>
+
+                        <td><textarea cols="35" rows="3" disabled style="background-color: white;resize: none;"> {{j.comm}} </textarea></td>
+                        <td class="row-actions"><a class="danger" *ngIf="j.user._id == isLoggedPerson()" (click)="DeleteUserComment(j._id)" ><i class="os-icon os-icon-ui-15"></i></a></td>
+
+                      </tr>
+                    </table>
+
+                    <hr/>
+                    <form [formGroup]="CommentsData" (ngSubmit)="UserComment()">
+                    <div class="form-group">
+                      <textarea formControlName="comm"  name="coment" rows="5" style="width: 300%" [ngClass]="{ 'is-invalid': submitted && GetCommentsC.comm.errors }" > </textarea>
+                      <div *ngIf="submitted && GetCommentsC.comm.errors" class="invalid-feedback">
+                        <div *ngIf="GetCommentsC.comm.errors.required">Vous devez entrer votre commenatire!</div>
+                      </div>
+                    </div>
+                      <div style="text-align: center;">
+                      <button  class="btn btn-primary" type="submit">Commenter</button>
+                    </div>
+                    </form>
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

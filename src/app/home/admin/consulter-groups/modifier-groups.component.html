@@ -1,0 +1,164 @@
+<div class="row pt-4">
+  <div class="col-sm-12">
+    <div class="element-wrapper">
+      <h6 class="element-header text-center">Liste des groupes</h6>
+      <div class="col-sm-5">
+        <a  data-toggle="modal" data-target="#myModal2" >
+          <div class="containerbutton">
+            <div class="button52" id="button-5">
+              <div id="translate"></div>
+              <a id="Publiera">Ajouter</a>
+            </div>
+          </div>
+        </a>
+      </div>
+      <br><br>
+      <div class="col-sm-12">
+        <form id="SearchForm">
+          <input id="myInput" onkeyup="SearchName()" type="search">
+          <i class="os-icon os-icon-search"></i>
+        </form>
+      </div>
+
+      <div class="element-box-tp"  id="myGroups">
+        <div class="table-responsive">
+          <table class="table table-padded">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Nom du groupe</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr *ngFor="let i of ShowGroupsList">
+              <td>
+                <label  class="si si-checkbox">
+                  <input type="checkbox" id="defaultCheckbox" />
+                  <span class="si-label"></span>
+                </label>
+              </td>
+              <td>
+                <div class="user-with-avatar">{{i.libelleGroup}}</div>
+              </td>
+              <td >
+                <div class="row-actions">
+                  <a class="danger"  style="color: #9d1818" (click)="DeleteGroupFn(i._id)"j><i class="os-icon os-icon-ui-15"></i></a>
+                  <a class="info" data-toggle="modal" data-target="#myModal" (click)="GetGroupByID(i._id,i.libelleGroup);ShowGroupByID();"> <i class="os-icon os-icon-edit-1"> </i> </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Pagination-->
+      <div class="controls-below-table">
+        <div class="table-records-pages">
+          <ul>
+            <li><a href="#">Previous</a></li>
+            <li><a class="current" href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="position: relative; padding-left : 450px;">
+        <a class="btn btn-sm btn-danger" ><b style="color: white;">Effacer les groupes séléctionnés</b> </a>
+      </div>
+
+    </div>
+    <!--END - Recent Ticket Comments-->
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                <div class="element-box">
+                  <form id="formValidate" [formGroup]="GroupEdit" (ngSubmit)="ModifyGroupByID()">
+                    <div class="element-info">
+                      <div class="element-info-with-icon">
+                        <div class="element-info-icon">
+                          <div class="os-icon os-icon-wallet-loaded"></div>
+                        </div>
+                        <div class="element-info-text">
+                          <h5 class="element-inner-header">Mise à jour du groupe</h5>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="form-group" >
+                      <input class="form-control" [value]="ShowGroupByIdVar.libelleGroup"  formControlName="libelleGroup" class="form-control" [ngClass]="{ 'is-invalid': submitted && EditC.libelleGroup.errors }" />
+                      <div class="help-block form-text with-errors form-control-feedback"></div>
+                      <div *ngIf="submitted && EditC.libelleGroup.errors" class="invalid-feedback"><div *ngIf="EditC.libelleGroup.errors.required">Champ ne peut pas être vide</div></div>
+                      <div *ngIf="submitted && EditC.libelleGroup.errors" class="invalid-feedback"><div *ngIf="EditC.libelleGroup.errors.pattern">Vous n'avez pas le droit d'utiliser des caractères spéciaux</div></div>
+                    </div>
+
+
+                    <div class="form-buttons">
+                      <button type="reset" class="btn btn-danger" data-dismiss="modal" data-target="#myModal">Annuler</button>
+                      <button class="btn btn-primary" type="submit" >Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                <div class="element-box">
+                  <form id="formValidate2" [formGroup]="GroupData" (ngSubmit)="OnGroupAdd()" >
+                    <div class="steps-w">
+                      <div class="step-content active" id="stepContent1">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group" >
+                              <input class="form-control" formControlName="libelleGroup" class="form-control" [ngClass]="{ 'is-invalid': submitted && AddC.libelleGroup.errors }" />
+                              <div class="help-block form-text with-errors form-control-feedback"></div>
+                              <div *ngIf="submitted && AddC.libelleGroup.errors" class="invalid-feedback"><div *ngIf="AddC.libelleGroup.errors.required">Champ ne peut pas être vide</div></div>
+                              <div *ngIf="submitted && AddC.libelleGroup.errors" class="invalid-feedback"><div *ngIf="AddC.libelleGroup.errors.pattern">Vous n'avez pas le droit d'utiliser des caractères spéciaux</div></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="buttons-w">
+                          <button class="btn btn-danger">Annuler</button>
+                          <button class="btn btn-primary">Ajouter</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

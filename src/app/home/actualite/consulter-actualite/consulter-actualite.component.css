@@ -1,0 +1,67 @@
+#logo{
+margin-left :880px;
+  position:relative;
+  top: 5px;
+}
+#datelogo{
+ margin-left: 955px;
+  color: black;
+  position: relative;
+  bottom : 50px;
+}
+
+#timelogo{
+  margin-left: 978px;
+  color: black;
+  position: relative;
+  bottom : 50px;
+
+}
+
+#sujet{
+  position: relative;
+  bottom: 47px;
+  text-align: center;
+}
+
+/**********************************/
+
+header {
+  position: relative;
+  height: 110px;
+  background-image: linear-gradient(#009bff, #463efa);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 calc(100% - 5vw)
+  );
+  /* change the calc height to a percentage height to get alternate responsive behavior*/
+}
+
+#text{
+  color: white;
+  word-break : break-all;
+  margin-left: 10px;
+  padding: 70px 10px 70px 0;
+}
+h1 {
+  padding: 100px 0;
+  border-radius: 20px;
+  font: 34px "Arial";
+  color: white;
+  text-align: center;
+  position : relative;
+  bottom: 200px;
+}
+
+section {
+  margin-top: -5vw;
+  background-image: linear-gradient(135deg, #777, #111);
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

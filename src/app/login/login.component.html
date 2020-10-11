@@ -1,0 +1,37 @@
+<div class="bounce-in-top">
+  <div class="bg-pan-left login-box">
+    <div class="logo-w">
+      <img alt="" src="./assets/img/polypoly.png" class="blink-1">
+    </div>
+    <h4 class="text-shadow-pop-bottom auth-header" id="position_text">Accès Poly-Forum</h4>
+    <form action="home" [formGroup]="LoginForm" (ngSubmit)="LoginFn();">
+      <div class="form-group">
+        <label for="">E-Mail</label>
+        <input class="form-control"  formControlName="Mail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Mail.errors }" />
+        <div class="help-block form-text with-errors form-control-feedback"></div>
+        <div *ngIf="submitted && f.Mail.errors" class="invalid-feedback">
+          <div *ngIf="f.Mail.errors.required">E-mail obligatoire (@polytechnicien.tn))</div>
+          <div *ngIf="f.Mail.errors.pattern">Votre être un polytechnicien pour avoir y accéder'</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input class="form-control" formControlName="password" type="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div class="help-block form-text with-errors form-control-feedback"></div>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback"><div *ngIf="f.password.errors.required">Mot de passe est obligatoire</div></div>
+      </div>
+      <div class="buttons-w">
+
+        <div class="containerMDPO">
+          <a routerLink="mdpOublie"><span style="color: red; ">Mot de passe oublié ?</span></a>
+        </div>
+        <div class="container">
+        <button type="submit" class="btn btn-1" >S'authentifier</button>
+        </div>
+      </div>
+      <div class="containeProf2"><a style="text-decoration:none;color:black;" routerLink="registerProf">Inscription Enseignants</a></div>
+      <div class="containerEtudiant2"><a style="text-decoration:none;color:black;" routerLink="registerStudent">Inscription Etudiants</a></div>
+    </form>
+  </div>
+</div>
+

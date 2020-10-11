@@ -1,0 +1,219 @@
+<div class="element-wrapper">
+  <h6 class="element-header text-center">Gérer cours</h6>
+  <div class="col-sm-5" style="position: relative; padding-left : 500px;">
+    <a  data-toggle="modal" data-target="#myModal2" >
+      <button class="btn btn-primary" type="submit"  >Publier</button>
+    </a>
+  </div>
+  <br><br>
+  <div class="col-sm-12">
+    <form id="SearchForm">
+      <input id="myInput" onkeyup="SearchName()" type="search">
+      <i class="os-icon os-icon-search"></i>
+    </form>
+  </div>
+
+  <div class="element-box-tp">
+    <div class="table-responsive">
+      <table class="table table-padded">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Cours</th>
+          <th>Description</th>
+          <th>Date de publication</th>
+          <th>Groupe</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+
+        <tr *ngFor="let i of ShowCourseProfVar">
+          <td class="text-center" width="20px">
+            <label  class="si si-checkbox">
+              <input type="checkbox" id="defaultCheckbox" />
+              <span class="si-label"></span>
+            </label>
+          </td>          <td>
+            <div class="badge badge-success-inverted"><span>{{i.libelle}}</span></div>
+          </td>
+          <td class="form-control" height="60px"><a >{{i.description}}</a></td>
+          <td>
+            <div class="smaller lighter">{{i.datePub|date:'dd/MM/yyyy'}}</div>
+          </td>
+          <td class="form-control" height="60px"><a class="badge badge-success-inverted"  >{{i.group.libelleGroup}}</a></td>
+          <td class="row-actions">
+            <a class="danger" (click)="DeleteCourseFn(i._id)"><i class="os-icon os-icon-ui-15"></i></a>
+            <a class="info" data-toggle="modal" data-target="#myModal3" (click)="GetCoursID(i._id);ShowCoursByID(i._id)"><i class="os-icon os-icon-pencil-1"></i></a>
+            <a class="info"  > <i class="os-icon os-icon-edit-1"> </i> </a>
+          </td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--Pagination-->
+  <div class="controls-below-table">
+    <div class="table-records-pages">
+      <ul>
+        <li><a href="#">Previous</a></li>
+        <li><a class="current" href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+      </ul>
+
+      <div class="col-sm-5" style="position: relative; padding-left : 450px;">
+        <a class="btn btn-sm btn-danger" ><b style="color: white;">Effacer les comptes séléctionnés</b> </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--END - Recent Ticket Comments-->
+<div class="container">
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                <div class="element-box">
+                  <form id="formValidate2"  >
+                    <div class="steps-w">
+                      <div class="step-content active" id="stepContent1">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <h6 class="element-header">Envoyer cours :</h6>
+
+                              <label for=""> Nom du cour</label>
+                              <input class="form-control" placeholder="Cour(s)" type="text">
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                          <label> Description</label>
+                          <textarea class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                          <label for=""> Cible</label>
+                          <select class="form-control">
+                            <option>A choisir</option>
+                            <option *ngFor="let i of ShowCibleVar">{{i.libelleGroup}}</option>
+                          </select>
+                        </div>
+
+
+                        <div class="file-upload-wrapper form-control">
+                          <input type="file" id="input-file-now" class="file-upload " />
+                        </div>
+
+                        <br>
+                        <div class="buttons-w">
+                          <button class="btn btn-danger">Annuler</button>
+                          <button class="btn btn-primary">Publier</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="content-i">
+            <div class="content-box text-center">
+              <div class="element-wrapper">
+                  <form id="formValidate3"  >
+
+                            <div class="row">
+
+
+                              <table class="table">
+                                <tr >
+                                  <td style="span-weight:bold"><span  color="#white"> <a class="badge badge-primary" ><b style="color: aliceblue">Cours</b></a></span></td>
+                                  <td style="span-weight:bold"><span  color="#white"><a class="badge badge-primary" ><b style="color: aliceblue">DESCRIPTION</b></a></span></td>
+                                  <td style="span-weight:bold"><span  color="#white"><a class="badge badge-primary" ><b style="color: aliceblue">DATE DE PUBLICATION</b></a></span></td>
+                                  <td style="span-weight:bold"><span  color="#white"><a class="badge badge-primary" ><b style="color: aliceblue">Groupe</b></a></span></td>
+                                </tr>
+
+
+                                <tr  >
+                                  <td>{{ShowCourstByIDVar.libelle}}</td>
+                                  <td>{{ShowCourstByIDVar.description}}</td>
+                                  <td>{{ShowCourstByIDVar.datePub|date:'dd/MM/yyyy'}}</td>
+                                  <td>{{ShowCourstByIDVar.group.libelleGroup}}</td>
+                                </tr>
+
+                              </table>
+
+                              <table class="table">
+
+                                <tr class="text-primary">
+                                  <td>
+                                    <div class="user-with-avatar"><img alt="" src="assets/img/avatar2.jpg"><span>BOUDRIGA Imed  a : 20:14 </span></div>
+                                  </td>
+                                  <td></td>
+
+                                  <td>Bonjour </td>
+                                  <td class="row-actions"><a class="danger" ><i class="os-icon os-icon-ui-15"></i></a></td>
+                                </tr>
+
+                                <tr class="text-primary">
+                                  <td>
+                                    <div class="user-with-avatar"><img alt="" src="assets/img/avatar3.jpg"><span>MIGHRI Radhi  a : 20:10 </span></div>
+                                  </td>
+                                  <td></td>
+
+                                  <td>
+                                    <textarea rows="2" cols="28" disabled style="background-color: white">dqsdqsdsqdqsdqsdqsdqsdqsdqsdqsdqsdqsdqsdqsdqsdqsdqsdqsdqs</textarea>
+                                  </td>
+                                  <td class="row-actions"><a class="danger" ><i class="os-icon os-icon-ui-15"></i></a></td>
+                                </tr>
+                              </table>
+
+                              <hr/>
+
+                                <textarea name="coment" rows="5" style="width: 300%" ></textarea>
+                                <input type="hidden" name="idcour" value="" />
+                                <div style="text-align: center;">
+                                  <button _ngcontent-hht-c1="" class="btn btn-primary" type="submit">Commenter</button>
+
+                                </div>
+
+                            </div>
+
+
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

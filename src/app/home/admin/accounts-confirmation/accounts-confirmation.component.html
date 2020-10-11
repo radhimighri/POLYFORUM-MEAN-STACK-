@@ -1,0 +1,82 @@
+<div class="row pt-4">
+  <div class="col-sm-12">
+    <!--START - Recent Ticket Comments-->
+    <div class="element-wrapper">
+      <h6 class="element-header text-center">Confirmation des comptes des étudiants</h6>
+
+      <div class="col-sm-12">
+        <form id="SearchForm">
+          <input id="myInput" onkeyup="SearchName()" type="search">
+          <i class="os-icon os-icon-search"></i>
+        </form>
+      </div>
+
+
+      <div class="element-box-tp">
+        <div class="table-responsive">
+          <table class="table table-padded">
+            <thead>
+            <tr>
+              <th>Utilisateur</th>
+              <th>matricule</th>
+              <th>Groupe</th>
+              <th>Date Naissance</th>
+              <th>Sexe</th>
+              <th>Pays</th>
+              <th class="text-center">Tel</th>
+              <th>E-Mail</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i of UnconfirmedUser">
+
+              <td>
+                <div class="user-with-avatar"><img alt="" src="assets/img/avatar1.jpg"><span>{{i.firstName}} {{i.lastName}}</span></div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{i.matricule}}</div>
+              </td>
+              <td class="text-center"><a class="badge badge-success-inverted" >{{i.Group.libelleGroup}}</a></td>
+              <td>
+                <div class="smaller lighter">{{i.Date_Nais|date:'dd/MM/yyyy'}}</div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{i.Sexe}}</div>
+              </td>
+              <td>
+                <div class="smaller lighter">{{i.Pays}}</div>
+              </td>
+              <td><span class="smaller lighter">{{i.Tel}}</span></td>
+              <td class="text-center"><a class="badge badge-success-inverted" >{{i.Mail}}</a></td>
+              <td class="row-actions">
+                <a class="success" (click)="ConfirmAcc(i._id)"><i class="os-icon os-icon-user-check"></i></a>
+                <a class="danger" (click)="UnConfirmAcc(i._id)"><i class="os-icon os-icon-user-x"></i></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Pagination-->
+      <div class="controls-below-table">
+        <div class="table-records-pages">
+          <ul>
+            <li><a href="#">Précédent</a></li>
+            <li><a class="current" href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Suivant</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-5" style="position: relative; padding-left : 450px;">
+        <a class="btn btn-sm btn-danger" ><b style="color: white;">Effacer les comptes séléctionnés</b> </a>
+      </div>
+
+    </div>
+    <!--END - Recent Ticket Comments-->
+  </div>
+</div>
+
